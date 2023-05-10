@@ -1,0 +1,21 @@
+version: '3.9'
+
+services:
+  server:
+    container_name: triplate-server
+    build: 
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - type: bind
+        source: ./server
+        target: /home/server
+      - type: volume
+        source: node_modules_server
+        target: /home/server/node_modules
+
+volumes:
+  node_modules_server:
+    name: triplate-node-modules-server
