@@ -15,7 +15,20 @@ services:
       - type: volume
         source: node_modules_server
         target: /home/server/node_modules
+  db:
+    image: postgres:15.2
+    container_name: triplate-postgres
+    env_file:
+      - ./server/.env
+    ports:
+      - 5432:5432
+    volumes:
+      - type: volume
+        source: triplate_db 
+        target: /var/lib/postgresql/data
 
 volumes:
   node_modules_server:
     name: triplate-node-modules-server
+  triplate_db:
+    name: triplate-db
